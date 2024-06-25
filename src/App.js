@@ -15,7 +15,7 @@ function App() {
 
   return (
     <div className="App">
-     <button onClike={onToggleButton}></button>
+     <button onClike={onToggleButton}>Open main Button</button>
     </div>
   );
 }
