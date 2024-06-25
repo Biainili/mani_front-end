@@ -18,7 +18,6 @@ function App() {
   return (
     <div className="App">
       Helo Word
-
       <button onClick={onClose}>Close</button>
     </div>
   );
