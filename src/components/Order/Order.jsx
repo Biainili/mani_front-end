@@ -9,7 +9,7 @@ function Order() {
     const { tg } = useTelegram();
 
     useEffect(() => {
-        tg.MainButton.setParams({ text: 'Отправить Заказ' });
+        tg.MainButton.setParams({ text: 'Отправить Заказ'});
     }, [tg]);
 
     useEffect(() => {
