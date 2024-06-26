@@ -15,7 +15,7 @@ function App() {
 
   return (
     <div className="App">
-     <button onClike={() => alert(user)}>Open main Button</button>
+     <button onClike={() => console.log(user)}>Open main Button</button>
     </div>
   );
 }
