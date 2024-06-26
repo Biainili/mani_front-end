@@ -18,7 +18,7 @@ function App() {
       <Header />
       <Routes> 
             <Route index element={<Product/>}/>
-            <Route path={'/order'} element={<Order/>}/>
+            <Route path={'order'} element={<Order/>}/>
       </Routes>
     </div>
   );
