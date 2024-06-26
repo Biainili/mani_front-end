@@ -4,7 +4,7 @@ import { useTelegram } from './hooks/useTelegram';
 const tg = window.Telegram.WebApp;
 
 function App() {
-  const {tg, onToggleButton} = useTelegram();
+  const {tg, onToggleButton, user} = useTelegram();
 
   useEffect(() => {
 
@@ -15,7 +15,7 @@ function App() {
 
   return (
     <div className="App">
-     <button onClike={onToggleButton}>Open main Button</button>
+     <button onClike={() => alert(user)}>Open main Button</button>
     </div>
   );
 }
