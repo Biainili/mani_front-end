@@ -1,0 +1,22 @@
+.product {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #eecf95;
+    padding: 15px;
+    width: 170px;
+}
+
+.img {
+    width: 100%;
+    height: 100px;
+    background: #555252;
+    margin: 0 auto;
+}
+
+.description {
+    font-size: 0.8em;
+}
+
+.add-bnt {
+    width: 100%;
+}

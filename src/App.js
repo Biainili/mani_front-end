@@ -3,7 +3,7 @@ import './App.css';
 import { useTelegram } from './hooks/useTelegram';
 import Header from './components/Header/Header';
 import { Route, Routes } from 'react-router-dom';
-import Product from './components/Product/Product';
+import Product from './components/ProductItem/ProductItem';
 import Order from './components/Order/Order';
 
 function App() {
