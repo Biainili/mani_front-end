@@ -16,7 +16,7 @@ function ProductItem({product, className, onAdd }) {
         <span>Стоимость: <b>{product.price}</b></span>
       </div>
       <Button onClick={onAddHandler} className={'add-btn'} >
-        Открить Форму
+        Добавить в Карзину
       </Button>
     </div>
   )

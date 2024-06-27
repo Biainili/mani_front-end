@@ -1,8 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react';
 import './Products.css';
 import ProductItem from '../ProductItem/ProductItem';
 import { useTelegram } from '../../hooks/useTelegram';
-
 
 const products = [
     { id: '1', title: 'Джинсы', price: 5000, description: 'Синего цвета, прямые' },
@@ -13,17 +12,28 @@ const products = [
     { id: '6', title: 'Куртка 7', price: 600, description: 'Зеленого цвета, теплая' },
     { id: '7', title: 'Джинсы 4', price: 5500, description: 'Синего цвета, прямые' },
     { id: '8', title: 'Куртка 5', price: 12000, description: 'Зеленого цвета, теплая' },
-]
+];
 
 const getTotalPrice = (items) => {
     return items.reduce((acc, item) => {
-        return acc += item.price;
-    }, 0)
-}
+        return acc + item.price;
+    }, 0);
+};
 
 function Products() {
     const [addedItems, setAddedItems] = useState([]);
     const { tg } = useTelegram();
+
+    useEffect(() => {
+        if (addedItems.length > 0) {
+            tg.MainButton.show();
+            tg.MainButton.setParams({
+                text: `Купить ${getTotalPrice(addedItems)}`
+            });
+        } else {
+            tg.MainButton.hide();
+        }
+    }, [addedItems, tg]);
 
     const onAdd = (product) => {
         const alreadyAdded = addedItems.find(item => item.id === product.id);
@@ -36,28 +46,20 @@ function Products() {
         }
 
         setAddedItems(newItems);
-
-        if (newItems) {
-            tg.MainButton.hide();
-        } else {
-            tg.MainButton.show();
-            tg.MainButton.setParams({
-                text: `Купить ${getTotalPrice(newItems)}`
-            })
-        }
-    }
+    };
 
     return (
         <div className={'list'}>
             {products.map(item => (
                 <ProductItem
+                    key={item.id} // добавление уникального ключа
                     product={item}
                     onAdd={onAdd}
                     className={'item'}
                 />
             ))}
         </div>
-    )
+    );
 }
 
-export default Products
+export default Products;
