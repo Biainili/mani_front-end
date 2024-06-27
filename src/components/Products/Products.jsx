@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import './Products.css'
+import './Products.css';
 import ProductItem from '../ProductItem/ProductItem';
 import { useTelegram } from '../../hooks/useTelegram';
 
