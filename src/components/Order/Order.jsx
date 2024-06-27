@@ -13,17 +13,16 @@ function Order() {
             country,
             city,
             size,
-        }
-        tg.sendData(JSON.stringify(data))
-
-    }, [])
+        };
+        tg.sendData(JSON.stringify(data));
+    }, [country, city, size, tg]);
 
     useEffect(() => {
-        tg.onEvent('mainButtonCliched', onSendData);
+        tg.onEvent('mainButtonClicked', onSendData);
         return () => {
-            tg.offEvent('mainButtonCliched', onSendData);
-        }
-    }, [])
+            tg.offEvent('mainButtonClicked', onSendData);
+        };
+    }, [onSendData, tg]);
 
     useEffect(() => {
         tg.MainButton.setParams({ text: 'Отправить Заказ' });
@@ -35,7 +34,7 @@ function Order() {
         } else {
             tg.MainButton.show();
         }
-    }, [city, size, country]);
+    }, [city, size, country, tg]);
 
     const onChangeCountry = (e) => {
         setCountry(e.target.value);
