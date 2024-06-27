@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import './Order.css';
 import { useTelegram } from '../../hooks/useTelegram';
 
@@ -8,8 +8,25 @@ function Order() {
     const [size, setSize] = useState('M');
     const { tg } = useTelegram();
 
+    const onSendData = useCallback(() => {
+        const data = {
+            country,
+            city,
+            size,
+        }
+        tg.sendData(JSON.stringify(data))
+
+    }, [])
+
     useEffect(() => {
-        tg.MainButton.setParams({ text: 'Отправить Заказ'});
+        tg.onEvent('mainButtonCliched', onSendData);
+        return () => {
+            tg.offEvent('mainButtonCliched', onSendData);
+        }
+    }, [])
+
+    useEffect(() => {
+        tg.MainButton.setParams({ text: 'Отправить Заказ' });
     }, [tg]);
 
     useEffect(() => {
