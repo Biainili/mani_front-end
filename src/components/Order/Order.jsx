@@ -8,7 +8,7 @@ function Order() {
     const [size, setSize] = useState('M');
     const [productType, setProductType] = useState('toy');
     const [photo, setPhoto] = useState(null);
-    const [photoPreview, setPhotoPreview] = useState(null);
+    const [photoPath, setPhotoPath] = useState(null);
     const { tg } = useTelegram();
 
     const onSendData = useCallback(() => {
@@ -17,11 +17,10 @@ function Order() {
             city,
             size,
             productType,
-            // photo: photoPreview // отправляем превью фото как base64
+            photoPath // отправляем путь к фото на сервере
         };
-        console.log('Sending data:', data); // Добавим лог для отладки
         tg.sendData(JSON.stringify(data));
-    }, [country, city, size, productType, tg]);
+    }, [country, city, size, productType, photoPath, tg]);
 
     useEffect(() => {
         tg.onEvent('mainButtonClicked', onSendData);
@@ -35,12 +34,12 @@ function Order() {
     }, [tg]);
 
     useEffect(() => {
-        if (!city || !size || !country || !photo) {
+        if (!city || !size || !country || !photoPath) {
             tg.MainButton.hide();
         } else {
             tg.MainButton.show();
         }
-    }, [city, size, country, photo, tg]);
+    }, [city, size, country, photoPath, tg]);
 
     const onChangeCountry = (e) => {
         setCountry(e.target.value);
@@ -62,11 +61,20 @@ function Order() {
         const file = e.target.files[0];
         setPhoto(file);
 
-        const reader = new FileReader();
-        reader.onloadend = () => {
-            setPhotoPreview(reader.result);
-        };
-        reader.readAsDataURL(file);
+        const formData = new FormData();
+        formData.append('photo', file);
+
+        fetch('http://localhost:3000/upload', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(result => {
+            setPhotoPath(result.filePath);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
     };
 
     return (
@@ -114,16 +122,14 @@ function Order() {
                     Рюкзак
                 </label>
             </div>
-
-            {/* <div className="upload-photo">
+            <div className="upload-photo">
                 <h3>Загрузить фото</h3>
                 <label htmlFor="file-upload" className="custom-file-upload">
                     <span>+</span> Выбрать фото
                 </label>
                 <input id="file-upload" type="file" onChange={onChangePhoto} />
-                {photoPreview && <img src={photoPreview} alt="Превью фото" className="photo-preview" />}
-            </div> */}
-
+                {photo && <img src={URL.createObjectURL(photo)} alt="Превью фото" className="photo-preview" />}
+            </div>
         </div>
     );
 }
