@@ -114,14 +114,16 @@ function Order() {
                     Рюкзак
                 </label>
             </div>
-            <div className="upload-photo">
+
+            {/* <div className="upload-photo">
                 <h3>Загрузить фото</h3>
                 <label htmlFor="file-upload" className="custom-file-upload">
                     <span>+</span> Выбрать фото
                 </label>
                 <input id="file-upload" type="file" onChange={onChangePhoto} />
                 {photoPreview && <img src={photoPreview} alt="Превью фото" className="photo-preview" />}
-            </div>
+            </div> */}
+
         </div>
     );
 }
