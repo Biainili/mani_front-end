@@ -8,14 +8,18 @@ export default function Header() {
 
 
     return (
-        <div className={'header'}>
-            <Button onClick={onClose}>Создать Заказ</Button>
-            <Button onClick={onClose}>Наши Товары</Button>
-            <Button onClick={onClose}>Связ с Админом</Button>
-            <Button onClick={onClose}>Закрыть</Button>
-            <span className={'username'}>
-                {user?.username} 
-            </span>
+        <div className={"nav_bar"}>
+            <div className='user_header'>
+                <span className={'username'}>
+                    {user?.username}
+                </span>
+                <Button onClick={onClose}>Закрыть</Button>
+            </div>
+            <div className={'header'}>
+                <Button onClick={onClose}>Создать Заказ</Button>
+                <Button onClick={onClose}>Наши Товары</Button>
+                <Button onClick={onClose}>Связ с Админом</Button>
+            </div>
         </div>
     );
 }
