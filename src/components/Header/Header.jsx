@@ -8,11 +8,13 @@ export default function Header() {
     const { user, onClose, onToggleButton } = useTelegram();
     const navigate = useNavigate();
 
-    
+
     const handleOrderClick = () => {
         navigate('/order');
     };
-
+   const handleMainClick = () => {
+        navigate('/');
+    };
 
     return (
         <div className={"nav_bar"}>
@@ -24,7 +26,7 @@ export default function Header() {
             </div>
             <div className={'header'}>
                 <Button onClick={handleOrderClick}>Создать Заказ</Button>
-                <Button onClick={onClose}>Наши Товары</Button>
+                <Button onClick={handleMainClick}>Наши Товары</Button>
                 <Button onClick={onClose}>Связ с Админом</Button>
             </div>
         </div>
