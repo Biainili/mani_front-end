@@ -110,7 +110,10 @@ function Order() {
             </div>
             <div className="upload-photo">
                 <h3>Загрузить фото</h3>
-                <input type="file" onChange={onChangePhoto} />
+                <label htmlFor="file-upload" className="custom-file-upload">
+                    <span>+</span> Выбрать фото
+                </label>
+                <input id="file-upload" type="file" onChange={onChangePhoto} />
             </div>
         </div>
     );
