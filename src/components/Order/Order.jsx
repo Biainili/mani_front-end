@@ -8,7 +8,7 @@ function Order() {
     const [size, setSize] = useState('M');
     const [productType, setProductType] = useState('toy');
     const [photo, setPhoto] = useState(null);
-    const [photoPreview, setPhotoPreview] = useState(null); 
+    const [photoPreview, setPhotoPreview] = useState(null);
     const { tg } = useTelegram();
 
     const onSendData = useCallback(() => {
