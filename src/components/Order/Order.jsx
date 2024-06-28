@@ -8,6 +8,7 @@ function Order() {
     const [size, setSize] = useState('M');
     const [productType, setProductType] = useState('toy');
     const [photo, setPhoto] = useState(null);
+    const [photoPreview, setPhotoPreview] = useState(null);
     const { tg } = useTelegram();
 
     const onSendData = useCallback(() => {
@@ -114,6 +115,7 @@ function Order() {
                     <span>+</span> Выбрать фото
                 </label>
                 <input id="file-upload" type="file" onChange={onChangePhoto} />
+                {photoPreview && <img src={photoPreview} alt="Превью фото" className="photo-preview" />}
             </div>
         </div>
     );
