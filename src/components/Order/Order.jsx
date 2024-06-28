@@ -8,7 +8,7 @@ function Order() {
     const [size, setSize] = useState('M');
     const [productType, setProductType] = useState('toy');
     const [photo, setPhoto] = useState(null);
-    const [photoPath, setPhotoPath] = useState(null);
+    const [photoPreview, setPhotoPreview] = useState(null);
     const { tg } = useTelegram();
 
     const onSendData = useCallback(() => {
@@ -17,10 +17,11 @@ function Order() {
             city,
             size,
             productType,
-            photoPath // отправляем путь к фото на сервере
+            photo: photoPreview // отправляем превью фото как base64
         };
+        console.log('Sending data:', data); // Добавим лог для отладки
         tg.sendData(JSON.stringify(data));
-    }, [country, city, size, productType, photoPath, tg]);
+    }, [country, city, size, productType, photoPreview, tg]);
 
     useEffect(() => {
         tg.onEvent('mainButtonClicked', onSendData);
@@ -34,12 +35,12 @@ function Order() {
     }, [tg]);
 
     useEffect(() => {
-        if (!city || !size || !country || !photoPath) {
+        if (!city || !size || !country || !photo) {
             tg.MainButton.hide();
         } else {
             tg.MainButton.show();
         }
-    }, [city, size, country, photoPath, tg]);
+    }, [city, size, country, photo, tg]);
 
     const onChangeCountry = (e) => {
         setCountry(e.target.value);
@@ -61,20 +62,11 @@ function Order() {
         const file = e.target.files[0];
         setPhoto(file);
 
-        const formData = new FormData();
-        formData.append('photo', file);
-
-        fetch('http://localhost:3000/upload', {
-            method: 'POST',
-            body: formData
-        })
-        .then(response => response.json())
-        .then(result => {
-            setPhotoPath(result.filePath);
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
+        const reader = new FileReader();
+        reader.onloadend = () => {
+            setPhotoPreview(reader.result);
+        };
+        reader.readAsDataURL(file);
     };
 
     return (
@@ -128,7 +120,7 @@ function Order() {
                     <span>+</span> Выбрать фото
                 </label>
                 <input id="file-upload" type="file" onChange={onChangePhoto} />
-                {photo && <img src={URL.createObjectURL(photo)} alt="Превью фото" className="photo-preview" />}
+                {photoPreview && <img src={photoPreview} alt="Превью фото" className="photo-preview" />}
             </div>
         </div>
     );
