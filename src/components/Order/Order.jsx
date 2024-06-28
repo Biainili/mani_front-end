@@ -17,11 +17,11 @@ function Order() {
             city,
             size,
             productType,
-            photo: photoPreview // отправляем превью фото как base64
+            // photo: photoPreview // отправляем превью фото как base64
         };
         console.log('Sending data:', data); // Добавим лог для отладки
         tg.sendData(JSON.stringify(data));
-    }, [country, city, size, productType, photoPreview, tg]);
+    }, [country, city, size, productType, tg]);
 
     useEffect(() => {
         tg.onEvent('mainButtonClicked', onSendData);
