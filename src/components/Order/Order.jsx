@@ -8,7 +8,7 @@ function Order() {
     const [size, setSize] = useState('M');
     const [productType, setProductType] = useState('toy');
     const [photo, setPhoto] = useState(null);
-    const [photoPreview, setPhotoPreview] = useState(null);
+    const [photoPreview, setPhotoPreview] = useState(null); // для отображения превью
     const { tg } = useTelegram();
 
     const onSendData = useCallback(() => {
@@ -58,7 +58,14 @@ function Order() {
     };
 
     const onChangePhoto = (e) => {
-        setPhoto(e.target.files[0]);
+        const file = e.target.files[0];
+        setPhoto(file);
+
+        const reader = new FileReader();
+        reader.onloadend = () => {
+            setPhotoPreview(reader.result);
+        };
+        reader.readAsDataURL(file);
     };
 
     return (
@@ -86,28 +93,25 @@ function Order() {
                 <option value={'XL - Большой'}>XL <i>30см</i></option>
             </select>
             <div className="product-type">
-                <h3 className={'textBook'}>Выберите тип продукта</h3>
-                <div className={'typeBook'}>
-                    <label>
-                        <input
-                            type="radio"
-                            value="toy"
-                            checked={productType === 'toy'}
-                            onChange={onChangeProductType}
-                        />
-                        Игрушка
-                    </label>
-
-                    <label>
-                        <input
-                            type="radio"
-                            value="backpack"
-                            checked={productType === 'backpack'}
-                            onChange={onChangeProductType}
-                        />
-                        Рюкзак
-                    </label>
-                </div>
+                <h3>Выберите тип продукта</h3>
+                <label>
+                    <input
+                        type="radio"
+                        value="toy"
+                        checked={productType === 'toy'}
+                        onChange={onChangeProductType}
+                    />
+                    Игрушка
+                </label>
+                <label>
+                    <input
+                        type="radio"
+                        value="backpack"
+                        checked={productType === 'backpack'}
+                        onChange={onChangeProductType}
+                    />
+                    Рюкзак
+                </label>
             </div>
             <div className="upload-photo">
                 <h3>Загрузить фото</h3>
