@@ -11,7 +11,7 @@ export default function Header() {
         <div className={"nav_bar"}>
             <div className='user_header'>
                 <span className={'username'}>
-                    {user?.username}
+                    {user?.username ? user?.username : "Armen"}
                 </span>
                 <Button onClick={onClose}>Закрыть</Button>
             </div>
