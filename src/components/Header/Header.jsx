@@ -1,10 +1,17 @@
 import React from 'react';
 import Button from '../Button/Button';
 import { useTelegram } from '../../hooks/useTelegram';
+import { useNavigate } from 'react-router-dom';
 import "./Header.css";
 
 export default function Header() {
     const { user, onClose, onToggleButton } = useTelegram();
+    const navigate = useNavigate();
+
+    
+    const handleOrderClick = () => {
+        navigate('/order');
+    };
 
 
     return (
@@ -16,7 +23,7 @@ export default function Header() {
                 <Button onClick={onClose}>Закрыть</Button>
             </div>
             <div className={'header'}>
-                <Button onClick={onClose}>Создать Заказ</Button>
+                <Button onClick={handleOrderClick}>Создать Заказ</Button>
                 <Button onClick={onClose}>Наши Товары</Button>
                 <Button onClick={onClose}>Связ с Админом</Button>
             </div>
