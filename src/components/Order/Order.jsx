@@ -8,7 +8,7 @@ function Order() {
     const [size, setSize] = useState('M');
     const [productType, setProductType] = useState('toy');
     const [photo, setPhoto] = useState(null);
-    const [photoPreview, setPhotoPreview] = useState(null); // для отображения превью
+    const [photoPreview, setPhotoPreview] = useState(null); 
     const { tg } = useTelegram();
 
     const onSendData = useCallback(() => {
@@ -17,10 +17,10 @@ function Order() {
             city,
             size,
             productType,
-            photo
+            photo: photoPreview // отправляем превью фото как base64
         };
         tg.sendData(JSON.stringify(data));
-    }, [country, city, size, productType, photo, tg]);
+    }, [country, city, size, productType, photoPreview, tg]);
 
     useEffect(() => {
         tg.onEvent('mainButtonClicked', onSendData);
