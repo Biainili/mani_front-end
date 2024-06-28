@@ -6,6 +6,8 @@ function Order() {
     const [country, setCountry] = useState('');
     const [city, setCity] = useState('');
     const [size, setSize] = useState('M');
+    const [productType, setProductType] = useState('toy');
+    const [photo, setPhoto] = useState(null);
     const { tg } = useTelegram();
 
     const onSendData = useCallback(() => {
@@ -13,9 +15,11 @@ function Order() {
             country,
             city,
             size,
+            productType,
+            photo
         };
         tg.sendData(JSON.stringify(data));
-    }, [country, city, size, tg]);
+    }, [country, city, size, productType, photo, tg]);
 
     useEffect(() => {
         tg.onEvent('mainButtonClicked', onSendData);
@@ -29,12 +33,12 @@ function Order() {
     }, [tg]);
 
     useEffect(() => {
-        if (!city || !size || !country) {
+        if (!city || !size || !country || !photo) {
             tg.MainButton.hide();
         } else {
             tg.MainButton.show();
         }
-    }, [city, size, country, tg]);
+    }, [city, size, country, photo, tg]);
 
     const onChangeCountry = (e) => {
         setCountry(e.target.value);
@@ -46,6 +50,14 @@ function Order() {
 
     const onChangeSize = (e) => {
         setSize(e.target.value);
+    };
+
+    const onChangeProductType = (e) => {
+        setProductType(e.target.value);
+    };
+
+    const onChangePhoto = (e) => {
+        setPhoto(e.target.files[0]);
     };
 
     return (
@@ -72,6 +84,34 @@ function Order() {
                 <option value={'M - Стандарт'}>M  <i>25см</i></option>
                 <option value={'XL - Большой'}>XL <i>30см</i></option>
             </select>
+            <div className="product-type">
+                <h3 className={'textBook'}>Выберите тип продукта</h3>
+                <div className={'typeBook'}>
+                    <label>
+                        <input
+                            type="radio"
+                            value="toy"
+                            checked={productType === 'toy'}
+                            onChange={onChangeProductType}
+                        />
+                        Игрушка
+                    </label>
+
+                    <label>
+                        <input
+                            type="radio"
+                            value="backpack"
+                            checked={productType === 'backpack'}
+                            onChange={onChangeProductType}
+                        />
+                        Рюкзак
+                    </label>
+                </div>
+            </div>
+            <div className="upload-photo">
+                <h3>Загрузить фото</h3>
+                <input type="file" onChange={onChangePhoto} />
+            </div>
         </div>
     );
 }
