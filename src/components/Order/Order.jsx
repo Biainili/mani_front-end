@@ -100,7 +100,7 @@ function Order() {
             />
             <select className={'select'} value={size} onChange={onChangeSize}>
                 <option value={"XS - маленький мини"}>XS <i>15см</i></option>
-                <option value={'S - маленький'}>S <i>20см</и></option>
+                <option value={'S - маленький'}>S <i>20см</i></option>
                 <option value={'M - Стандарт'}>M  <i>25см</i></option>
                 <option value={'XL - Большой'}>XL <i>30см</i></option>
             </select>
