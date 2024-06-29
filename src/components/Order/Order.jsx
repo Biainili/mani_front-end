@@ -8,20 +8,28 @@ function Order() {
     const [size, setSize] = useState('M');
     const [productType, setProductType] = useState('toy');
     const [photo, setPhoto] = useState(null);
-    const [photoPreview, setPhotoPreview] = useState(null);
     const { tg } = useTelegram();
 
     const onSendData = useCallback(() => {
-        const data = {
-            country,
-            city,
-            size,
-            productType,
-            photo: photoPreview // отправляем превью фото как base64
-        };
-        console.log('Sending data:', data); // Добавим лог для отладки
-        tg.sendData(JSON.stringify(data));
-    }, [country, city, size, productType, photoPreview, tg]);
+        const formData = new FormData();
+        formData.append('country', country);
+        formData.append('city', city);
+        formData.append('size', size);
+        formData.append('productType', productType);
+        formData.append('photo', photo);
+
+        fetch('http://localhost:3000/send-photo', {
+            method: 'POST',
+            body: formData,
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Success:', data);
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+    }, [country, city, size, productType, photo]);
 
     useEffect(() => {
         tg.onEvent('mainButtonClicked', onSendData);
@@ -61,12 +69,6 @@ function Order() {
     const onChangePhoto = (e) => {
         const file = e.target.files[0];
         setPhoto(file);
-
-        const reader = new FileReader();
-        reader.onloadend = () => {
-            setPhotoPreview(reader.result);
-        };
-        reader.readAsDataURL(file);
     };
 
     return (
@@ -120,7 +122,6 @@ function Order() {
                     <span>+</span> Выбрать фото
                 </label>
                 <input id="file-upload" type="file" onChange={onChangePhoto} />
-                {photoPreview && <img src={photoPreview} alt="Превью фото" className="photo-preview" />}
             </div>
         </div>
     );
