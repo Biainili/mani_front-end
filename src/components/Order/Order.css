@@ -108,5 +108,5 @@
 }
 
 .product_A.selected .product_image {
-  border: 2px solid blue;
+  border: 3px solid rgb(230, 215, 10);
 }
