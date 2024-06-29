@@ -20,7 +20,7 @@ function Order() {
         formData.append('photo', photo);
         formData.append('chatId', tg.initDataUnsafe.user.id);
 
-        fetch('/send-photo', {
+        fetch('http://localhost:3000/send-photo', { // Убедитесь, что путь ведет к вашему локальному серверу
             method: 'POST',
             body: formData
         }).then(response => response.json())
