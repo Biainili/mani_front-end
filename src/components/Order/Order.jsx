@@ -8,6 +8,7 @@ function Order() {
     const [size, setSize] = useState('M');
     const [productType, setProductType] = useState('toy');
     const [photo, setPhoto] = useState(null);
+    const [photoPreview, setPhotoPreview] = useState(null);
     const { tg } = useTelegram();
 
     const onSendData = useCallback(() => {
@@ -17,19 +18,21 @@ function Order() {
         formData.append('size', size);
         formData.append('productType', productType);
         formData.append('photo', photo);
+        formData.append('chatId', tg.initDataUnsafe.user.id);
 
-        fetch('http://localhost:3000/send-photo', {
+        fetch('/send-photo', {
             method: 'POST',
-            body: formData,
-        })
-        .then(response => response.json())
-        .then(data => {
-            console.log('Success:', data);
-        })
-        .catch((error) => {
-            console.error('Error:', error);
-        });
-    }, [country, city, size, productType, photo]);
+            body: formData
+        }).then(response => response.json())
+          .then(data => {
+              if (data.success) {
+                  tg.sendData(JSON.stringify({ success: true }));
+              } else {
+                  console.error('Error sending data');
+              }
+          })
+          .catch(error => console.error('Error:', error));
+    }, [country, city, size, productType, photo, tg]);
 
     useEffect(() => {
         tg.onEvent('mainButtonClicked', onSendData);
@@ -69,6 +72,12 @@ function Order() {
     const onChangePhoto = (e) => {
         const file = e.target.files[0];
         setPhoto(file);
+
+        const reader = new FileReader();
+        reader.onloadend = () => {
+            setPhotoPreview(reader.result);
+        };
+        reader.readAsDataURL(file);
     };
 
     return (
@@ -122,6 +131,7 @@ function Order() {
                     <span>+</span> Выбрать фото
                 </label>
                 <input id="file-upload" type="file" onChange={onChangePhoto} />
+                {photoPreview && <img src={photoPreview} alt="Превью фото" className="photo-preview" />}
             </div>
         </div>
     );
