@@ -101,27 +101,65 @@ function Order() {
         value={city}
         onChange={onChangeCity}
       />
-      <select className={"select"} value={size} onChange={onChangeSize}>
-        <option value={"XS - маленький мини"}>
-          XS <i>15см</i>
-        </option>
-        <option value={"S - маленький"}>
-          S <i>20см</i>
-        </option>
-        <option value={"M - Стандарт"}>
-          M <i>25см</i>
-        </option>
-        <option value={"XL - Большой"}>
-          XL <i>30см</i>
-        </option>
-      </select>
+
+      <div className={"container_size"}>
+        <label className={`product_B ${size === "XS" ? "active_size" : ""}`}>
+          <span className={`tex ${size === "XS" ? "text_active" : ""}`}>
+            {" "}
+            XS
+          </span>
+          <input
+            type="radio"
+            value="XS"
+            checked={size === "XS"}
+            onChange={onChangeSize}
+          />
+          <span className={"product_size tex"}>10 см</span>
+        </label>
+
+        <label className={`product_B ${size === "S" ? "active_size" : ""}`}>
+          <span className={`tex ${size === "S" ? "text_active" : ""}`}>S</span>
+          <input
+            type="radio"
+            value="S"
+            checked={size === "S"}
+            onChange={onChangeSize}
+          />
+          <span className={"product_size tex"}>15 см</span>
+        </label>
+
+        <label className={`product_B ${size === "M" ? "active_size" : ""}`}>
+          <span className={`tex ${size === "M" ? "text_active" : ""}`}>M </span>
+          <input
+            type="radio"
+            value="M"
+            checked={size === "M"}
+            onChange={onChangeSize}
+          />
+          <span className={"product_size tex"}>20 см</span>
+        </label>
+
+        <label className={`product_B ${size === "L" ? "active_size" : ""}`}>
+          <span className={`tex ${size === "L" ? "text_active" : ""}`}> L</span>
+          <input
+            type="radio"
+            value="L"
+            checked={size === "L"}
+            onChange={onChangeSize}
+          />
+          <span className={"product_size tex"}>25 см</span>
+        </label>
+      </div>
+
       <div className="product-type">
         <h3>Выберите тип продукта</h3>
         <div className="container_type">
           <label
             className={`product_A ${productType === "toy" ? "selected" : ""}`}
           >
-            <span className={`${productType === "toy" ? "text_active" : ""}`}>Игрушка</span>
+            <span className={`${productType === "toy" ? "text_active" : ""}`}>
+              Игрушка
+            </span>
             <input
               type="radio"
               value="toy"
@@ -135,18 +173,18 @@ function Order() {
               productType === "backpack" ? "selected" : ""
             }`}
           >
-            <span className={`${productType === "backpack" ? "text_active" : ""}`}>Рюкзак</span>
+            <span
+              className={`${productType === "backpack" ? "text_active" : ""}`}
+            >
+              Рюкзак
+            </span>
             <input
               type="radio"
               value="backpack"
               checked={productType === "backpack"}
               onChange={onChangeProductType}
             />
-            <img
-              src={Backpack_img}
-              alt="Рюкзак"
-              className="product_image"
-            />
+            <img src={Backpack_img} alt="Рюкзак" className="product_image" />
           </label>
         </div>
       </div>
