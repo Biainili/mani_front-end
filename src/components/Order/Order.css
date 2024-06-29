@@ -108,5 +108,10 @@
 }
 
 .product_A.selected .product_image {
-  border: 3px solid rgb(230, 215, 10);
+  width: 120px;
+  border: 3px solid #e6d70a;
+}
+.text_active {
+    font-size: 18px;
+    color: #e6d70a;
 }

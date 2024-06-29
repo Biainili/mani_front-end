@@ -121,7 +121,7 @@ function Order() {
           <label
             className={`product_A ${productType === "toy" ? "selected" : ""}`}
           >
-            Игрушка
+            <span className={`${productType === "toy" ? "text_active" : ""}`}>Игрушка</span>
             <input
               type="radio"
               value="toy"
@@ -135,7 +135,7 @@ function Order() {
               productType === "backpack" ? "selected" : ""
             }`}
           >
-            Рюкзак
+            <span className={`${productType === "backpack" ? "text_active" : ""}`}>Рюкзак</span>
             <input
               type="radio"
               value="backpack"
