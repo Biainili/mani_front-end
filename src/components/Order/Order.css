@@ -35,6 +35,7 @@
 }
 
 .product-type,
+.prod_size,
 .upload-photo {
   display: flex;
   flex-direction: column;
@@ -138,5 +139,5 @@
 }
 
 .active_size {
-    border: 3px solid #e6d70a; 
+  border: 3px solid #e6d70a;
 }

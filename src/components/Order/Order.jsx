@@ -102,53 +102,62 @@ function Order() {
         onChange={onChangeCity}
       />
 
-      <div className={"container_size"}>
-        <label className={`product_B ${size === "XS" ? "active_size" : ""}`}>
-          <span className={`tex ${size === "XS" ? "text_active" : ""}`}>
-            {" "}
-            XS
-          </span>
-          <input
-            type="radio"
-            value="XS"
-            checked={size === "XS"}
-            onChange={onChangeSize}
-          />
-          <span className={"product_size tex"}>10 см</span>
-        </label>
+      <div className="prod_size">
+      <h3>Выберите размер продукта</h3>
+        <div className={"container_size"}>
+          <label className={`product_B ${size === "XS" ? "active_size" : ""}`}>
+            <span className={`tex ${size === "XS" ? "text_active" : ""}`}>
+              XS
+            </span>
+            <input
+              type="radio"
+              value="XS"
+              checked={size === "XS"}
+              onChange={onChangeSize}
+            />
+            <span className={"product_size tex"}>10 см</span>
+          </label>
 
-        <label className={`product_B ${size === "S" ? "active_size" : ""}`}>
-          <span className={`tex ${size === "S" ? "text_active" : ""}`}>S</span>
-          <input
-            type="radio"
-            value="S"
-            checked={size === "S"}
-            onChange={onChangeSize}
-          />
-          <span className={"product_size tex"}>15 см</span>
-        </label>
+          <label className={`product_B ${size === "S" ? "active_size" : ""}`}>
+            <span className={`tex ${size === "S" ? "text_active" : ""}`}>
+              S
+            </span>
+            <input
+              type="radio"
+              value="S"
+              checked={size === "S"}
+              onChange={onChangeSize}
+            />
+            <span className={"product_size tex"}>15 см</span>
+          </label>
 
-        <label className={`product_B ${size === "M" ? "active_size" : ""}`}>
-          <span className={`tex ${size === "M" ? "text_active" : ""}`}>M </span>
-          <input
-            type="radio"
-            value="M"
-            checked={size === "M"}
-            onChange={onChangeSize}
-          />
-          <span className={"product_size tex"}>20 см</span>
-        </label>
+          <label className={`product_B ${size === "M" ? "active_size" : ""}`}>
+            <span className={`tex ${size === "M" ? "text_active" : ""}`}>
+              M{" "}
+            </span>
+            <input
+              type="radio"
+              value="M"
+              checked={size === "M"}
+              onChange={onChangeSize}
+            />
+            <span className={"product_size tex"}>20 см</span>
+          </label>
 
-        <label className={`product_B ${size === "L" ? "active_size" : ""}`}>
-          <span className={`tex ${size === "L" ? "text_active" : ""}`}> L</span>
-          <input
-            type="radio"
-            value="L"
-            checked={size === "L"}
-            onChange={onChangeSize}
-          />
-          <span className={"product_size tex"}>25 см</span>
-        </label>
+          <label className={`product_B ${size === "L" ? "active_size" : ""}`}>
+            <span className={`tex ${size === "L" ? "text_active" : ""}`}>
+              {" "}
+              L
+            </span>
+            <input
+              type="radio"
+              value="L"
+              checked={size === "L"}
+              onChange={onChangeSize}
+            />
+            <span className={"product_size tex"}>25 см</span>
+          </label>
+        </div>
       </div>
 
       <div className="product-type">
