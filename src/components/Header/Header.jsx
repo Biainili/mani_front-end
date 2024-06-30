@@ -22,7 +22,7 @@ export default function Header() {
           <span className={"username"}>
             {user?.first_name} {user?.last_name}
           </span>
-          <span className={"username"}>({user?.username})</span>
+          <span className={"username"}>{user?.username}</span>
         </div>
 
         <Button onClick={onClose}>Закрыть</Button>
