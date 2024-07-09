@@ -19,6 +19,7 @@ function Order() {
     formData.append("country", country);
     formData.append("city", city);
     formData.append("size", size);
+    formData.append("price", price);  // Добавление цены
     formData.append("productType", productType);
     formData.append("photo", photo);
     formData.append("chatId", tg.initDataUnsafe.user.id);
@@ -36,7 +37,7 @@ function Order() {
         }
       })
       .catch((error) => console.error("Error:", error));
-  }, [country, city, size, productType, photo, tg]);
+  }, [country, city, size, price, productType, photo, tg]);
 
   useEffect(() => {
     tg.onEvent("mainButtonClicked", onSendData);
@@ -67,6 +68,19 @@ function Order() {
 
   const onChangeSize = (e) => {
     setSize(e.target.value);
+    switch (e.target.value) {
+      case 'S':
+        setPrice(7500);
+        break;
+      case 'M':
+        setPrice(8500);
+        break;
+      case 'L':
+        setPrice(9500);
+        break;
+      default:
+        setPrice(0); // Неизвестный размер
+    }
   };
 
   const onChangeProductType = (e) => {
