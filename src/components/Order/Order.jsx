@@ -8,6 +8,7 @@ function Order() {
   const [country, setCountry] = useState("");
   const [city, setCity] = useState("");
   const [size, setSize] = useState("M");
+  const [price, setPrice] = useState(8500)
   const [productType, setProductType] = useState("toy");
   const [photo, setPhoto] = useState(null);
   const [photoPreview, setPhotoPreview] = useState(null);
@@ -103,25 +104,11 @@ function Order() {
       />
 
       <div className="prod_size">
-      <h3>Выберите размер продукта</h3>
+        <h3>Выберите размер продукта</h3>
         <div className={"container_size"}>
-          <label className={`product_B ${size === "XS" ? "active_size" : ""}`}>
-            <span className={`tex ${size === "XS" ? "text_active" : ""}`}>
-              S
-            </span>
-            <input
-              type="radio"
-              value="XS"
-              checked={size === "XS"}
-              onChange={onChangeSize}
-            />
-            <span className={"product_size tex"}>30 см</span>
-            <span className={"product_size tex"}>7500 руб.</span>
-          </label>
-
           <label className={`product_B ${size === "S" ? "active_size" : ""}`}>
             <span className={`tex ${size === "S" ? "text_active" : ""}`}>
-              M
+              S
             </span>
             <input
               type="radio"
@@ -129,8 +116,22 @@ function Order() {
               checked={size === "S"}
               onChange={onChangeSize}
             />
-            <span className={"product_size tex"}>40 см</span>
-            <span className={"product_size tex"}>8500 руб.</span>
+            <span className={"product_size tex size_sm"}>30 см</span>
+            <span className={"product_size tex price"}>7500 руб.</span>
+          </label>
+
+          <label className={`product_B ${size === "M" ? "active_size" : ""}`}>
+            <span className={`tex ${size === "M" ? "text_active" : ""}`}>
+              M
+            </span>
+            <input
+              type="radio"
+              value="M"
+              checked={size === "M"}
+              onChange={onChangeSize}
+            />
+            <span className={"product_size tex size_sm"}>40 см</span>
+            <span className={"product_size tex price"}>8500 руб.</span>
           </label>
 
           <label className={`product_B ${size === "L" ? "active_size" : ""}`}>
@@ -143,8 +144,8 @@ function Order() {
               checked={size === "L"}
               onChange={onChangeSize}
             />
-            <span className={"product_size tex"}>50 см</span>
-            <span className={"product_size tex"}>9500 руб.</span>
+            <span className={"product_size tex size_sm"}>50 см</span>
+            <span className={"product_size tex price"}>9500 руб.</span>
           </label>
         </div>
         <button className={"toOrder"}>Индивидувльный Заказ</button>
@@ -168,9 +169,8 @@ function Order() {
             <img src={Toy_img} alt="Игрушка" className="product_image" />
           </label>
           <label
-            className={`product_A ${
-              productType === "backpack" ? "selected" : ""
-            }`}
+            className={`product_A ${productType === "backpack" ? "selected" : ""
+              }`}
           >
             <span
               className={`${productType === "backpack" ? "text_active" : ""}`}

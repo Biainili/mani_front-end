@@ -107,7 +107,7 @@
 }
 
 .product_B {
-  width: 80px;
+  width: 90px;
 }
 
 .product_A input[type="radio"] {
@@ -157,5 +157,13 @@
   border-radius: 8px;
   margin-inline: 15px;
   text-transform: uppercase;
-  
+}
+
+.price {
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.size_sm {
+  font-size: 13px;
 }
