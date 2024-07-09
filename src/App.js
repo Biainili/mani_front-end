@@ -18,8 +18,8 @@ function App() {
     <div className="App">
       <Header />
       <Routes> 
-            <Route index element={<Products/>}/>
-            <Route path={'order'} element={<Order/>}/>
+            <Route index element={< Order/>}/>
+            <Route path={'products'} element={<Products/>}/>
       </Routes>
     </div>
   );
