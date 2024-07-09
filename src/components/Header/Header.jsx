@@ -7,12 +7,13 @@ import "./Header.css";
 export default function Header() {
   const { user, onClose, onToggleButton } = useTelegram();
   const navigate = useNavigate();
+  const closer = false;
 
   const handleOrderClick = () => {
-    navigate("/order");
+    navigate("/");
   };
   const handleMainClick = () => {
-    navigate("/");
+    navigate("/products");
   };
 
   return (
@@ -28,8 +29,8 @@ export default function Header() {
         <Button onClick={onClose}>Закрыть</Button>
       </div>
       <div className={"header"}>
-        <Button onClick={handleOrderClick}>Создать Заказ</Button>
-        <Button onClick={handleMainClick}>Наши Товары</Button>
+     {closer && <Button onClick={handleOrderClick}>Создать Заказ</Button>}
+     {closer &&<Button onClick={handleMainClick}>Наши Товары</Button>}
         <Button onClick={onClose}>Связ с Админом</Button>
       </div>
     </div>
