@@ -19,9 +19,9 @@ function Order() {
     formData.append("country", country);
     formData.append("city", city);
     formData.append("size", size);
-    formData.append("price", price);  // Добавление цены
     formData.append("productType", productType);
     formData.append("photo", photo);
+    formData.append("price", price);  // Добавление цены
     formData.append("chatId", tg.initDataUnsafe.user.id);
 
     fetch("http://localhost:3000/send-photo", {
@@ -37,7 +37,7 @@ function Order() {
         }
       })
       .catch((error) => console.error("Error:", error));
-  }, [country, city, size, price, productType, photo, tg]);
+  }, [country, city, size, productType, photo, price, tg]);
 
   useEffect(() => {
     tg.onEvent("mainButtonClicked", onSendData);
