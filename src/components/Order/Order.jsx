@@ -107,7 +107,7 @@ function Order() {
         <div className={"container_size"}>
           <label className={`product_B ${size === "XS" ? "active_size" : ""}`}>
             <span className={`tex ${size === "XS" ? "text_active" : ""}`}>
-              XS
+              S
             </span>
             <input
               type="radio"
@@ -115,12 +115,13 @@ function Order() {
               checked={size === "XS"}
               onChange={onChangeSize}
             />
-            <span className={"product_size tex"}>10 см</span>
+            <span className={"product_size tex"}>30 см</span>
+            <span className={"product_size tex"}>7500 руб.</span>
           </label>
 
           <label className={`product_B ${size === "S" ? "active_size" : ""}`}>
             <span className={`tex ${size === "S" ? "text_active" : ""}`}>
-              S
+              M
             </span>
             <input
               type="radio"
@@ -128,25 +129,12 @@ function Order() {
               checked={size === "S"}
               onChange={onChangeSize}
             />
-            <span className={"product_size tex"}>15 см</span>
-          </label>
-
-          <label className={`product_B ${size === "M" ? "active_size" : ""}`}>
-            <span className={`tex ${size === "M" ? "text_active" : ""}`}>
-              M{" "}
-            </span>
-            <input
-              type="radio"
-              value="M"
-              checked={size === "M"}
-              onChange={onChangeSize}
-            />
-            <span className={"product_size tex"}>20 см</span>
+            <span className={"product_size tex"}>40 см</span>
+            <span className={"product_size tex"}>8500 руб.</span>
           </label>
 
           <label className={`product_B ${size === "L" ? "active_size" : ""}`}>
             <span className={`tex ${size === "L" ? "text_active" : ""}`}>
-              {" "}
               L
             </span>
             <input
@@ -155,9 +143,11 @@ function Order() {
               checked={size === "L"}
               onChange={onChangeSize}
             />
-            <span className={"product_size tex"}>25 см</span>
+            <span className={"product_size tex"}>50 см</span>
+            <span className={"product_size tex"}>9500 руб.</span>
           </label>
         </div>
+        <button className={"toOrder"}>Индивидувльный Заказ</button>
       </div>
 
       <div className="product-type">
