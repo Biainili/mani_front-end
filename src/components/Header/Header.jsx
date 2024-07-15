@@ -16,6 +16,10 @@ export default function Header() {
     navigate("/products");
   };
 
+  const onHandleIndividual = () => {
+    window.open('https://t.me/mode_mani', '_blank');
+  }
+
   return (
     <div className={"nav_bar"}>
       <div className="user_header">
@@ -31,7 +35,7 @@ export default function Header() {
       <div className={"header"}>
      {closer && <Button onClick={handleOrderClick}>Создать Заказ</Button>}
      {closer &&<Button onClick={handleMainClick}>Наши Товары</Button>}
-        <Button onClick={onClose}>Связ с Админом</Button>
+        <Button onClick={onHandleIndividual}>Связ с Админом</Button>
       </div>
     </div>
   );

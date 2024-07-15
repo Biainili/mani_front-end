@@ -27,7 +27,7 @@ function Order() {
     formData.append("size", size);
     formData.append("productType", productType);
     formData.append("photo", photo);
-    formData.append("price", price);  // Добавление цены
+    formData.append("price", price);  
     formData.append("chatId", tg.initDataUnsafe.user.id);
 
     fetch("http://localhost:3000/send-photo", {
