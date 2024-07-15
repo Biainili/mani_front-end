@@ -4,7 +4,18 @@
   box-sizing: border-box;
 }
 
+@font-face {
+  font-family: 'Nunito'; /* Имя шрифта, которое будет использоваться в CSS */
+  src: url('./fonts/ofont.ru_Nunito.ttf') ; /* Путь к файлу шрифта */
+  font-weight: normal; /* Настройка жирности */
+  font-style: normal; /* Настройка стиля */
+}
+
 body {
   background: var(--tg-theme-bg-color);
   color: var(--tg-theme-text-color);
+  font-family: 'Nunito', sans-serif; 
 }
+
+
+

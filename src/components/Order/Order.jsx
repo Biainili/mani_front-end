@@ -14,6 +14,12 @@ function Order() {
   const [photoPreview, setPhotoPreview] = useState(null);
   const { tg } = useTelegram();
 
+
+  const onHandleIndividual = () => {
+    window.open('https://t.me/model_mani', '_blank');
+  }
+
+
   const onSendData = useCallback(() => {
     const formData = new FormData();
     formData.append("country", country);
@@ -98,6 +104,7 @@ function Order() {
     reader.readAsDataURL(file);
   };
 
+
   return (
     <div className={"form"}>
       <h2>Заказать</h2>
@@ -162,7 +169,7 @@ function Order() {
             <span className={"product_size tex price"}>9500 руб.</span>
           </label>
         </div>
-        <button className={"toOrder"}>Индивидувльный Заказ</button>
+        <button onClick={onHandleIndividual} className={"toOrder"}>Индивидувльный Заказ</button>
       </div>
 
       <div className="product-type">
@@ -182,7 +189,8 @@ function Order() {
             />
             <img src={Toy_img} alt="Игрушка" className="product_image" />
           </label>
-          <label
+
+          {/* <label
             className={`product_A ${productType === "backpack" ? "selected" : ""
               }`}
           >
@@ -198,7 +206,9 @@ function Order() {
               onChange={onChangeProductType}
             />
             <img src={Backpack_img} alt="Рюкзак" className="product_image" />
-          </label>
+          </label> */}
+
+
         </div>
       </div>
       <div className="upload-photo">
