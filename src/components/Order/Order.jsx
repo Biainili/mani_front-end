@@ -16,7 +16,7 @@ function Order() {
 
 
   const onHandleIndividual = () => {
-    window.open('https://t.me/model_mani', '_blank');
+    window.open('https://t.me/mode_mani', '_blank');
   }
 
 
