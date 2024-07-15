@@ -3,26 +3,30 @@ import "./Order.css";
 import { useTelegram } from "../../hooks/useTelegram";
 import Toy_img from "../../assets/img/toy_img.webp";
 import Backpack_img from "../../assets/img/backpack_img.webp";
-import { v4 as uuidv4 } from 'uuid';  // Import UUID library
+
+// Функция для генерации уникального идентификатора из 7 цифр
+const generateUniqueId = () => {
+  return Math.floor(1000000 + Math.random() * 9000000).toString();
+};
 
 function Order() {
   const [country, setCountry] = useState("");
   const [city, setCity] = useState("");
   const [size, setSize] = useState("M");
-  const [price, setPrice] = useState(8500)
+  const [price, setPrice] = useState(8500);
   const [productType, setProductType] = useState("toy");
   const [photo, setPhoto] = useState(null);
   const [photoPreview, setPhotoPreview] = useState(null);
-  const [orderId] = useState(uuidv4());  // Generate a unique order ID
+  const [orderId] = useState(generateUniqueId()); // Генерация уникального идентификатора
   const { tg } = useTelegram();
 
   const onHandleIndividual = () => {
     window.open('https://t.me/mode_mani', '_blank');
-  } 
+  }
 
   const onSendData = useCallback(() => {
     const formData = new FormData();
-    formData.append("orderId", orderId);  // Include order ID
+    formData.append("orderId", orderId); // Включение идентификатора заказа
     formData.append("country", country);
     formData.append("city", city);
     formData.append("size", size);
@@ -185,6 +189,25 @@ function Order() {
             />
             <img src={Toy_img} alt="Игрушка" className="product_image" />
           </label>
+
+              {/* <label
+            className={product_A ${productType === "backpack" ? "selected" : ""
+              }}
+          >
+            <span
+              className={${productType === "backpack" ? "text_active" : ""}}
+            >
+              Рюкзак
+            </span>
+            <input
+              type="radio"
+              value="backpack"
+              checked={productType === "backpack"}
+              onChange={onChangeProductType}
+            />
+            <img src={Backpack_img} alt="Рюкзак" className="product_image" />
+          </label> */}
+          
         </div>
       </div>
       <div className="upload-photo">
