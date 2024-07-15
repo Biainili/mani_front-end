@@ -3,6 +3,7 @@ import "./Order.css";
 import { useTelegram } from "../../hooks/useTelegram";
 import Toy_img from "../../assets/img/toy_img.webp";
 import Backpack_img from "../../assets/img/backpack_img.webp";
+import { v4 as uuidv4 } from 'uuid';  // Import UUID library
 
 function Order() {
   const [country, setCountry] = useState("");
@@ -12,16 +13,16 @@ function Order() {
   const [productType, setProductType] = useState("toy");
   const [photo, setPhoto] = useState(null);
   const [photoPreview, setPhotoPreview] = useState(null);
+  const [orderId] = useState(uuidv4());  // Generate a unique order ID
   const { tg } = useTelegram();
-
 
   const onHandleIndividual = () => {
     window.open('https://t.me/mode_mani', '_blank');
-  }
-
+  } 
 
   const onSendData = useCallback(() => {
     const formData = new FormData();
+    formData.append("orderId", orderId);  // Include order ID
     formData.append("country", country);
     formData.append("city", city);
     formData.append("size", size);
@@ -43,7 +44,7 @@ function Order() {
         }
       })
       .catch((error) => console.error("Error:", error));
-  }, [country, city, size, productType, photo, price, tg]);
+  }, [country, city, size, productType, photo, price, orderId, tg]);
 
   useEffect(() => {
     tg.onEvent("mainButtonClicked", onSendData);
@@ -104,7 +105,6 @@ function Order() {
     reader.readAsDataURL(file);
   };
 
-
   return (
     <div className={"form"}>
       <h2>Заказать</h2>
@@ -123,7 +123,6 @@ function Order() {
         value={city}
         onChange={onChangeCity}
       />
-
       <div className="prod_size">
         <h3>Выберите размер продукта</h3>
         <div className={"container_size"}>
@@ -140,7 +139,6 @@ function Order() {
             <span className={"product_size tex size_sm"}>30 см</span>
             <span className={"product_size tex price"}>7500 руб.</span>
           </label>
-
           <label className={`product_B ${size === "M" ? "active_size" : ""}`}>
             <span className={`tex ${size === "M" ? "text_active" : ""}`}>
               M
@@ -154,7 +152,6 @@ function Order() {
             <span className={"product_size tex size_sm"}>40 см</span>
             <span className={"product_size tex price"}>8500 руб.</span>
           </label>
-
           <label className={`product_B ${size === "L" ? "active_size" : ""}`}>
             <span className={`tex ${size === "L" ? "text_active" : ""}`}>
               L
@@ -171,7 +168,6 @@ function Order() {
         </div>
         <button onClick={onHandleIndividual} className={"toOrder"}>Индивидувльный Заказ</button>
       </div>
-
       <div className="product-type">
         <h3>Выберите тип продукта</h3>
         <div className="container_type">
@@ -189,26 +185,6 @@ function Order() {
             />
             <img src={Toy_img} alt="Игрушка" className="product_image" />
           </label>
-
-          {/* <label
-            className={`product_A ${productType === "backpack" ? "selected" : ""
-              }`}
-          >
-            <span
-              className={`${productType === "backpack" ? "text_active" : ""}`}
-            >
-              Рюкзак
-            </span>
-            <input
-              type="radio"
-              value="backpack"
-              checked={productType === "backpack"}
-              onChange={onChangeProductType}
-            />
-            <img src={Backpack_img} alt="Рюкзак" className="product_image" />
-          </label> */}
-
-
         </div>
       </div>
       <div className="upload-photo">
