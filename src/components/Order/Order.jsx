@@ -32,7 +32,7 @@ function Order() {
     formData.append("size", size);
     formData.append("productType", productType);
     formData.append("photo", photo);
-    formData.append("price", price);  
+    formData.append("price", price);
     formData.append("chatId", tg.initDataUnsafe.user.id);
 
     fetch("http://localhost:3000/send-photo", {
@@ -190,13 +190,10 @@ function Order() {
             <img src={Toy_img} alt="Игрушка" className="product_image" />
           </label>
 
-              {/* <label
-            className={product_A ${productType === "backpack" ? "selected" : ""
-              }}
-          >
-            <span
-              className={${productType === "backpack" ? "text_active" : ""}}
-            >
+
+          {/* THIS NO NOW FOR PROD stars */}
+          <label className={`product_A ${productType === "backpack" ? "selected" : ""}`}>
+            <span className={`${productType === "backpack" ? "text_active" : ""}`}>
               Рюкзак
             </span>
             <input
@@ -206,8 +203,9 @@ function Order() {
               onChange={onChangeProductType}
             />
             <img src={Backpack_img} alt="Рюкзак" className="product_image" />
-          </label> */}
-          
+          </label>
+          {/* THIS NO NOW FOR PROD end */}
+
         </div>
       </div>
       <div className="upload-photo">
